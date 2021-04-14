@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Header from '../components/Header';
 
 import { getPrismicClient } from '../services/prismic';
 
@@ -31,8 +32,9 @@ export default function Home() {
       <Head>
         <title>Spacetrevaling | Home</title>
       </Head>
+      <Header />
       <main className={ styles.contentContainer }>
-        <img src="/images/logo.svg" alt="Logo"/>
+        <h1>Jean Fernandes de Macedo</h1>
       </main>
     </>
   );
