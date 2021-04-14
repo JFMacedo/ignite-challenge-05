@@ -2,6 +2,8 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { getPrismicClient } from '../services/prismic';
 import { FiCalendar, FiUser } from 'react-icons/fi'
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import Header from '../components/Header';
 
@@ -42,7 +44,13 @@ export default function Home() {
             <div className={ styles.info }>
               <time>
                 <FiCalendar />
-                13 Abr 2021
+                { format(
+                  new Date(1991, 6, 10),
+                  "dd MMM yyyy",
+                  {
+                    locale: ptBR,
+                  }
+                ) }
               </time>
               <span>
                 <FiUser />
