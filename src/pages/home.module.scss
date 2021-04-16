@@ -1,38 +1,54 @@
 .contentContainer {
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 1.5rem 0.5rem;
 
   .posts {
-    h1 {
-      font-size: 1.75rem;
-      color: var(--color-heading);
-    }
+    a {
+      display: block;
 
-    h2 {
-      margin-top: 0.5rem;
-      font-size: 1.125rem;
-      font-weight: 400;
-    }
-  }
+      h1 {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+        color: var(--color-heading);
+        transition: 200ms;
+      }
+  
+      h2 {
+        margin-top: 0.5rem;
+        font-size: 1.125rem;
+        font-weight: 400;
+      }
 
-  .info {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 1.25rem;
-    font-size: 0.875rem;
-    color: var(--color-info);
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 1.25rem;
+        font-size: 0.875rem;
+        color: var(--color-info);
+    
+        time,
+        span {
+          display: flex;
+          align-items: center;
+        }
+    
+        svg {
+          margin-right: 0.5rem;
+          font-size: 1.25rem;
+        }
+      }
 
-    time,
-    span {
-      display: flex;
-      align-items: center;
-    }
+      & + a {
+        margin-top: 3rem;
+      }
 
-    svg {
-      margin-right: 0.5rem;
-      font-size: 1.25rem;
+      &:hover {
+        h1 {
+          color: var(--color-highlight);
+        }
+      }
     }
   }
 }
