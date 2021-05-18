@@ -40,7 +40,7 @@ export default function Home({ postsPagination }: HomeProps) {
       <main className={ styles.contentContainer }>
         <div className={ styles.posts }>
           { postsPagination.results.map(post => (
-              <a key={ post.uid }>
+              <a href="#" key={ post.uid }>
                 <h1>{ post.data.title }</h1>
                 <h2>{ post.data.subtitle }</h2>
                 <div className={ styles.info }>
@@ -50,7 +50,7 @@ export default function Home({ postsPagination }: HomeProps) {
                   </time>
                   <span>
                     <FiUser />
-                    Jean Macedo
+                    { post.data.author }
                   </span>
                 </div>
               </a>
@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const postsResponse = await prismic.query([
     Prismic.predicates.at('document.type', 'posts')
   ], {
-    fetch: ['posts.title', 'posts.subtitle'],
+    fetch: ['posts.title', 'posts.subtitle', 'posts.author'],
     pageSize: 2
   });
 
@@ -84,7 +84,7 @@ export const getStaticProps: GetStaticProps = async () => {
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
-        // author: post.data.author
+        author: post.data.author
       }
     };
   });
