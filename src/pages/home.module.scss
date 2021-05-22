@@ -50,5 +50,14 @@
         }
       }
     }
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-highlight);
+      margin-top: 4rem;
+    }
   }
 }
