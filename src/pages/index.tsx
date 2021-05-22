@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { getPrismicClient } from '../services/prismic';
-import { FiCalendar, FiUser } from 'react-icons/fi'
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { FiCalendar, FiUser } from 'react-icons/fi';
 import Prismic from '@prismicio/client';
+
+import { formatDate } from '../utils/dateFormatter';
 
 import Header from '../components/Header';
 
@@ -31,6 +32,28 @@ interface HomeProps {
 }
 
 export default function Home({ postsPagination }: HomeProps) {
+  const [posts, setPosts] = useState<Post[]>(postsPagination.results);
+  const [nextPage, setNextPage] = useState(postsPagination.next_page);
+
+  async function handleLoadPosts() {
+    const data = await fetch(nextPage).then(response => response.json());
+
+    const nextPagePosts = data.results.map((post: Post) => ({
+      uid: post.uid,
+      first_publication_date: formatDate(post.first_publication_date),
+      data: {
+        title: post.data.title,
+        subtitle: post.data.subtitle,
+        author: post.data.author
+      }
+    }));
+
+    const newPosts = [...posts, ...nextPagePosts];
+
+    setPosts(newPosts);
+    setNextPage(data.next_page);
+  };
+
   return (
     <>
       <Head>
@@ -39,7 +62,7 @@ export default function Home({ postsPagination }: HomeProps) {
       <Header />
       <main className={ styles.contentContainer }>
         <div className={ styles.posts }>
-          { postsPagination.results.map(post => (
+          { posts.map(post => (
               <a href="#" key={ post.uid }>
                 <h1>{ post.data.title }</h1>
                 <h2>{ post.data.subtitle }</h2>
@@ -55,6 +78,12 @@ export default function Home({ postsPagination }: HomeProps) {
                 </div>
               </a>
             )) }
+
+            { nextPage && (
+              <button onClick={ handleLoadPosts }>
+                Carregar mais posts
+              </button>
+            ) }
         </div>
       </main>
     </>
@@ -74,13 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        "dd MMM yyyy",
-        {
-          locale: ptBR,
-        }
-      ),
+      first_publication_date: formatDate(post.first_publication_date),
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
