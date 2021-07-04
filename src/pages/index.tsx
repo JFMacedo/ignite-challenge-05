@@ -13,7 +13,7 @@ import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 
 interface Post {
-  uid?: string;
+  slug?: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -39,7 +39,7 @@ export default function Home({ postsPagination }: HomeProps) {
     const data = await fetch(nextPage).then(response => response.json());
 
     const nextPagePosts = data.results.map((post: Post) => ({
-      uid: post.uid,
+      slug: post.slug,
       first_publication_date: formatDate(post.first_publication_date),
       data: {
         title: post.data.title,
@@ -63,7 +63,7 @@ export default function Home({ postsPagination }: HomeProps) {
       <main className={ styles.contentContainer }>
         <div className={ styles.posts }>
           { posts.map(post => (
-              <a href="#" key={ post.uid }>
+              <a href={ `/post/${ post.slug }` } key={ post.slug }>
                 <h1>{ post.data.title }</h1>
                 <h2>{ post.data.subtitle }</h2>
                 <div className={ styles.info }>
@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const posts = postsResponse.results.map(post => {
     return {
-      uid: post.uid,
+      slug: post.uid,
       first_publication_date: formatDate(post.first_publication_date),
       data: {
         title: post.data.title,
