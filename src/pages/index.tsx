@@ -13,7 +13,7 @@ import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 
 interface Post {
-  slug?: string;
+  uid?: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -39,7 +39,7 @@ export default function Home({ postsPagination }: HomeProps) {
     const data = await fetch(nextPage).then(response => response.json());
 
     const nextPagePosts = data.results.map((post: Post) => ({
-      slug: post.slug,
+      uid: post.uid,
       first_publication_date: formatDate(post.first_publication_date),
       data: {
         title: post.data.title,
@@ -47,6 +47,9 @@ export default function Home({ postsPagination }: HomeProps) {
         author: post.data.author
       }
     }));
+
+    console.log(nextPagePosts);
+    
 
     const newPosts = [...posts, ...nextPagePosts];
 
@@ -63,21 +66,21 @@ export default function Home({ postsPagination }: HomeProps) {
       <main className={ styles.contentContainer }>
         <div className={ styles.posts }>
           { posts.map(post => (
-              <a href={ `/post/${ post.slug }` } key={ post.slug }>
-                <h1>{ post.data.title }</h1>
-                <h2>{ post.data.subtitle }</h2>
-                <div className={ styles.info }>
-                  <time>
-                    <FiCalendar />
-                    { post.first_publication_date }
-                  </time>
-                  <span>
-                    <FiUser />
-                    { post.data.author }
-                  </span>
-                </div>
-              </a>
-            )) }
+            <a href={ `/post/${ post.uid }` } key={ post.uid }>
+              <h1>{ post.data.title }</h1>
+              <h2>{ post.data.subtitle }</h2>
+              <div className={ styles.info }>
+                <time>
+                  <FiCalendar />
+                  { post.first_publication_date }
+                </time>
+                <span>
+                  <FiUser />
+                  { post.data.author }
+                </span>
+              </div>
+            </a>
+          )) }
 
             { nextPage && (
               <button onClick={ handleLoadPosts }>
@@ -97,12 +100,13 @@ export const getStaticProps: GetStaticProps = async () => {
     Prismic.predicates.at('document.type', 'posts')
   ], {
     fetch: ['posts.title', 'posts.subtitle', 'posts.author'],
-    pageSize: 2
+    pageSize: 2,
+    orderings: '[document.first_publication_date desc]'
   });
 
   const posts = postsResponse.results.map(post => {
     return {
-      slug: post.uid,
+      uid: post.uid,
       first_publication_date: formatDate(post.first_publication_date),
       data: {
         title: post.data.title,
