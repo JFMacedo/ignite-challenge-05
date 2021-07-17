@@ -69,10 +69,10 @@ export default function Home({ postsPagination }: HomeProps) {
             <a href={ `/post/${ post.uid }` } key={ post.uid }>
               <h1>{ post.data.title }</h1>
               <h2>{ post.data.subtitle }</h2>
-              <div className={ styles.info }>
+              <div className={ commonStyles.info }>
                 <time>
                   <FiCalendar />
-                  { post.first_publication_date }
+                  { formatDate(post.first_publication_date) }
                 </time>
                 <span>
                   <FiUser />
@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: formatDate(post.first_publication_date),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,

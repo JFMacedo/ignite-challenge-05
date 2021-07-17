@@ -1,1 +1,37 @@
-// TODO
+.banner {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.contentContainer {
+  max-width: 720px;
+  margin: 5rem auto;
+  padding: 0.5rem;
+
+  h1 {
+    font-size: 3rem;
+    letter-spacing: -0.5px;
+    color: var(--color-heading);
+  }
+
+  .contentGroup {
+    margin-top: 4rem;
+
+    h2 {
+      font-size: 2.25rem;
+      color: var(--color-heading);
+    }
+
+    > div {
+      margin-top: 2.25rem;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      list-style-position: inside;
+      
+      ul, ol {
+        padding: 0.5rem;
+      }
+    }
+  }
+}

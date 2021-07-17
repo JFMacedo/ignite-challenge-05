@@ -3,9 +3,12 @@ import Head from 'next/head';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
 
-import Header from '../../components/Header';
+import { FiCalendar, FiUser } from 'react-icons/fi';
 
+import Header from '../../components/Header';
 import { getPrismicClient } from '../../services/prismic';
+
+import { formatDate } from '../../utils/dateFormatter';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
@@ -16,6 +19,7 @@ interface Post {
     title: string;
     banner: {
       url: string;
+      alt: string;
     };
     author: string;
     content: {
@@ -38,14 +42,27 @@ export default function Post({ post }: PostProps) {
         <title>Home | Spacetrevaling</title>
       </Head>
       <Header />
-      <main>
-        <img src={ post.data.banner.url } alt="" />
+      <img
+        src={ post.data.banner.url }
+        alt={ post.data.banner.alt }
+        className={ styles.banner }
+      />
+      <main className={ styles.contentContainer }>
         <h1>{post.data.title}</h1>
-        <h2>{post.data.author}</h2>
+        <div className={ commonStyles.info }>
+          <time>
+            <FiCalendar />
+            { formatDate(post.first_publication_date) }
+          </time>
+          <span>
+            <FiUser />
+            { post.data.author }
+          </span>
+        </div>
         { post.data.content.map(content => {
           return (
-            <div key={ content.heading }>
-              <h3>{ content.heading }</h3>
+            <div key={ content.heading } className={ styles.contentGroup }>
+              <h2>{ content.heading }</h2>
               <div
                 dangerouslySetInnerHTML={ { __html: content.body.text } }
               />
@@ -80,7 +97,8 @@ export const getStaticProps = async ({ params }) => {
     data: {
       title: response.data.title,
       banner: {
-        url: response.data.banner.url
+        url: response.data.banner.url,
+        alt: response.data.banner.alt
       },
       author: response.data.author,
       content: response.data.content.map(content => {
