@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { getPrismicClient } from '../services/prismic';
 import { FiCalendar, FiUser } from 'react-icons/fi';
@@ -40,7 +41,7 @@ export default function Home({ postsPagination }: HomeProps) {
 
     const nextPagePosts = data.results.map((post: Post) => ({
       uid: post.uid,
-      first_publication_date: formatDate(post.first_publication_date),
+      first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
@@ -66,20 +67,22 @@ export default function Home({ postsPagination }: HomeProps) {
       <main className={ styles.contentContainer }>
         <div className={ styles.posts }>
           { posts.map(post => (
-            <a href={ `/post/${ post.uid }` } key={ post.uid }>
-              <h1>{ post.data.title }</h1>
-              <h2>{ post.data.subtitle }</h2>
-              <div className={ commonStyles.info }>
-                <time>
-                  <FiCalendar />
-                  { formatDate(post.first_publication_date) }
-                </time>
-                <span>
-                  <FiUser />
-                  { post.data.author }
-                </span>
-              </div>
-            </a>
+            <Link href={ `/post/${ post.uid }` } key={ post.uid }>
+              <a href="">
+                <h1>{ post.data.title }</h1>
+                <h2>{ post.data.subtitle }</h2>
+                <div className={ commonStyles.info }>
+                  <time>
+                    <FiCalendar />
+                    { formatDate(post.first_publication_date) }
+                  </time>
+                  <span>
+                    <FiUser />
+                    { post.data.author }
+                  </span>
+                </div>
+              </a>
+            </Link>
           )) }
 
             { nextPage && (
