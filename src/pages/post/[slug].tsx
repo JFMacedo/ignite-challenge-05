@@ -20,13 +20,14 @@ interface Post {
     title: string;
     banner: {
       url: string;
+      alt: string;
     };
     author: string;
     content: {
       heading: string;
       body: {
         text: string;
-      };
+      }[];
     }[];
   };
 }
@@ -46,6 +47,16 @@ export default function Post({ post }: PostProps) {
     )
   }
 
+  const totalWords = post.data.content.reduce((total, contentItem) => {
+    total += contentItem.heading.split(' ').length;
+
+    const words = contentItem.body.map(item => item.text.split(' ').length);
+    words.map(word => (total += word));
+    return total;
+  }, 0);
+
+  const readTime = Math.ceil(totalWords / 200);
+
   return (
     <>
       <Head>
@@ -54,7 +65,7 @@ export default function Post({ post }: PostProps) {
       <Header />
       <img
         src={ post.data.banner.url }
-        alt="imagem"
+        alt={ post.data.banner.alt }
         className={ styles.banner }
       />
       <main className={ styles.contentContainer }>
@@ -70,7 +81,7 @@ export default function Post({ post }: PostProps) {
           </span>
           <span>
             <FiClock />
-            4 min
+            {`${readTime} min`}
           </span>
         </div>
         { post.data.content.map(content => {
