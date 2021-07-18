@@ -3,10 +3,9 @@
 </h1>
 
 <p align="center">
-	<img alt="Author" src="https://img.shields.io/badge/Author-Jean%20Fernandes%20de%20Macedo-FF57B2?style=flat" />
-	<img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/JFMacedo/
-ignite-challenge-05?color=FF57B2&style=flat" />
-	<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/JFMacedo/ignite-challenge-05?color=FF57B2&style=flat" />
+	<img alt="Author" src="https://img.shields.io/badge/Author-Jean%20Fernandes%20de%20Macedo-FF57B2" />
+	<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/jfmacedo/ignite-challenge-05?color=FF57B2" />
+  <img alt="Languase count" src="https://img.shields.io/github/languages/count/jfmacedo/ignite-challenge-05?color=FF57B2" />
 </p>
 
 <div align="center">
