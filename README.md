@@ -33,7 +33,7 @@ Para rodas o projeto você precisa antes ter instalado:
 - [Node.js](https://nodejs.org/pt-br/)
 - [Yarn](https://yarnpkg.com/)
 
-```zsh
+```bash
 #No terminal rode o seguinte comando
 $ git clone https://github.com/JFMacedo/ignite-challenge-05.git
 
@@ -116,11 +116,12 @@ Para rodar o projeto também será necessário uma conta no no prismic e confugu
 Após configurar o prsimic, adicionar um arquivo .env na raiz do projeto como o .env.exmaple e inserir a chave API.
 
 Agora é só rodar o projeto em ambiente de desenvolvimento:
-```zsh
+```bash
 $ yarn dev
 ```
 
-Desenvolvido por [Jean Fernandes de Macedo](https://github.com/JFMacedo)
+Desenvolvido por:
 
-[![Linkedin Badge](https://img.shields.io/badge/-Jean%20Fernandes%20de%20Macedo-0077B5?style=plastic&logo=Linkedin&link=https://www.linkedin.com/in/jfmacedo91/)](https://www.linkedin.com/in/jean-fernandes-de-macedo-b843a3194/) 
-[![Gmail Badge](https://img.shields.io/badge/-jfmacedo91@gmail.com-c14438?style=plastic&logo=Gmail&logoColor=white&link=mailto:jfmacedo91@gmail.com)](mailto:jfmacedo91@gmail.com)
+[![Github Badge](https://img.shields.io/badge/-JFMacedo-%23181717?logo=github)](https://github.com/JFMacedo)
+[![Linkedin Badge](https://img.shields.io/badge/-Jean%20Fernandes%20de%20Macedo-%230A66C2?logo=linkedin)](https://www.linkedin.com/in/jfmacedo91/) 
+[![Gmail Badge](https://img.shields.io/badge/-jfmacedo91%40gmail.com-FFFFFF?logo=gmail)](mailto:jfmacedo91@gmail.com)
