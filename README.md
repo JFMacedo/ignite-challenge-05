@@ -4,11 +4,9 @@
 
 <p align="center">
 	<img alt="Author" src="https://img.shields.io/badge/Author-Jean%20Fernandes%20de%20Macedo-FF57B2?style=flat" />
-	<img alt="License" src="https://img.shields.io/badge/license-MIT-FF57B2?style=flat" />
 	<img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/JFMacedo/
 ignite-challenge-05?color=FF57B2&style=flat" />
 	<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/JFMacedo/ignite-challenge-05?color=FF57B2&style=flat" />
-	<img alt="License" src="https://img.shields.io/badge/status-Conclu%C3%ADdo-FF57B2?style=flat" />
 </p>
 
 <div align="center">
