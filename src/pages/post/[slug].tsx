@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
 
@@ -35,9 +36,13 @@ interface Post {
 
 interface PostProps {
   post: Post;
+  preview: boolean;
 }
 
-export default function Post({ post }: PostProps) {
+export default function Post({
+  post,
+  preview
+}: PostProps) {
   const router = useRouter();
 
   if(router.isFallback) {
@@ -61,7 +66,7 @@ export default function Post({ post }: PostProps) {
   return (
     <>
       <Head>
-        <title>Home | Spacetrevaling</title>
+        <title>{ post.data.title } | Spacetrevaling</title>
       </Head>
       <Header />
       <img
@@ -101,6 +106,14 @@ export default function Post({ post }: PostProps) {
 
       <footer className={ styles.footerContainer }>
         <Comments />
+
+        { preview && (
+          <aside>
+            <Link href="/api/exit-preview">
+              <a className={ commonStyles.previewButton }>Sair do modo preview</a>
+            </Link>
+          </aside>
+        ) }
       </footer>
     </>
   );
@@ -120,13 +133,18 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+  preview = false,
+  previewData
+}) => {
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('posts', String(params.slug), {});
 
   return {
     props: {
-      post: response
+      post: response,
+      preview
     }
   };
 };

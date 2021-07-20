@@ -26,3 +26,16 @@
   min-height: 100vh;
   font-size: 2rem;
 }
+
+.previewButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+  margin-top: 4rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  background-color: var(--color-heading);
+  color: var(--color-background);
+}
