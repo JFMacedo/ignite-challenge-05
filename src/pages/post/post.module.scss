@@ -6,7 +6,7 @@
 
 .contentContainer {
   max-width: 720px;
-  margin: 5rem auto;
+  margin: 5rem auto 2rem;
   padding: 0.5rem;
 
   h1 {
@@ -42,6 +42,40 @@
 
 .footerContainer {
   max-width: 720px;
-  margin: 5rem auto;
+  margin: 2rem auto 5rem;
   padding: 0.5rem;
+  border-top: 1px solid #D7D7D722;
+
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: flex-end;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+
+    .previousPost {
+      text-align: left;
+    }
+
+    .nextPost {
+      text-align: right;
+    }
+
+    p {
+      font-size: 1.125rem;
+      letter-spacing: -0.5px;
+    }
+
+    a {
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--color-highlight);
+      transition: 200ms;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
 }

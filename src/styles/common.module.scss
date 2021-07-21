@@ -38,4 +38,9 @@
   border-radius: 0.25rem;
   background-color: var(--color-heading);
   color: var(--color-background);
+  transition: 200ms;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
 }

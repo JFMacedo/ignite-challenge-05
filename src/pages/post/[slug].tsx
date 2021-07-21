@@ -34,13 +34,24 @@ interface Post {
   };
 }
 
+interface NavPost {
+  uid: string;
+  data: {
+    title: string;
+  }
+}
+
 interface PostProps {
   post: Post;
+  previousPost: NavPost;
+  nextPost: NavPost;
   preview: boolean;
 }
 
 export default function Post({
   post,
+  previousPost,
+  nextPost,
   preview
 }: PostProps) {
   const router = useRouter();
@@ -105,6 +116,28 @@ export default function Post({
       </main>
 
       <footer className={ styles.footerContainer }>
+        <nav>
+          { previousPost ? (
+            <div className={ styles.previousPost }>
+              <p>{ previousPost.data.title }</p>
+              <Link href={ `/post/${previousPost.uid}` }>
+                <a>Post anterior</a>
+              </Link>
+            </div>
+          ) : (
+            <a></a>
+          )}
+          { nextPost ? (
+            <div className={ styles.nextPost }>
+              <p>{ nextPost.data.title }</p>
+              <Link href={ `/post/${nextPost.uid}` }>
+                <a>Próximo post</a>
+              </Link>
+            </div>
+          ) : (
+            <a></a>
+          )}
+        </nav>
         <Comments />
 
         { preview && (
@@ -139,12 +172,32 @@ export const getStaticProps = async ({
   previewData
 }) => {
   const prismic = getPrismicClient();
-  const response = await prismic.getByUID('posts', String(params.slug), {});
+  const response = await prismic.getByUID('posts', String(params.slug), {
+    ref: previewData?.ref ?? null
+  });
+
+  const previousPost = await prismic.query([
+    Prismic.predicates.at('document.type', 'posts')
+  ], {
+    pageSize: 1,
+    orderings: '[document.first_publication_date]',
+    after: response.id
+  });
+
+  const nextPost = await prismic.query([
+    Prismic.predicates.at('document.type', 'posts')
+  ], {
+    pageSize: 1,
+    orderings: '[document.first_publication_date desc]',
+    after: response.id
+  });
 
   return {
     props: {
       post: response,
-      preview
+      preview,
+      previousPost: previousPost.results[0] || null,
+      nextPost: nextPost.results[0] || null
     }
   };
 };
