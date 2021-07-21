@@ -12,3 +12,15 @@ export function formatDate(date: string) {
 
   return formatteddate;
 };
+
+export function formatEditDate(date: string) {
+  const formatteddate = format(
+    new Date(date),
+    "'* editado em' dd MMM yyyy', às 'HH:mm",
+    {
+      locale: ptBR,
+    }
+  );
+
+  return formatteddate;
+};

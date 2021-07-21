@@ -9,7 +9,7 @@ import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import Header from '../../components/Header';
 import { getPrismicClient } from '../../services/prismic';
 
-import { formatDate } from '../../utils/dateFormatter';
+import { formatDate, formatEditDate } from '../../utils/dateFormatter';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
@@ -18,6 +18,7 @@ import { Comments } from '../../components/Comments';
 
 interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   data: {
     title: string;
     banner: {
@@ -100,6 +101,11 @@ export default function Post({
             <FiClock />
             {`${readTime} min`}
           </span>
+        </div>
+        <div className={ styles.edit }>
+          { post.last_publication_date > post.first_publication_date && (
+            formatEditDate(post.last_publication_date)
+          ) }
         </div>
         { post.data.content.map(content => {
           return (
