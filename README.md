@@ -122,6 +122,6 @@ $ yarn dev
 
 Desenvolvido por:
 
-[![Github Badge](https://img.shields.io/badge/-JFMacedo-%23181717?logo=github)](https://github.com/JFMacedo)
+[![Github Badge](https://img.shields.io/badge/-JFMacedo-%23181717?logo=github)](https://github.com/jfmacedo91)
 [![Linkedin Badge](https://img.shields.io/badge/-Jean%20Fernandes%20de%20Macedo-%230A66C2?logo=linkedin)](https://www.linkedin.com/in/jfmacedo91/) 
 [![Gmail Badge](https://img.shields.io/badge/-jfmacedo91%40gmail.com-FFFFFF?logo=gmail)](mailto:jfmacedo91@gmail.com)
